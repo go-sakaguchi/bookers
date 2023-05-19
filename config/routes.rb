@@ -3,5 +3,6 @@ Rails.application.routes.draw do
 root to: 'homes#top'
 get 'books' => 'books#index'
 get 'books/:id' => 'books#show'
+post 'books' => 'books#create'
 get 'books/edit' => 'books#edit'
 end

@@ -4,5 +4,5 @@ root to: 'homes#top'
 get 'books' => 'books#index'
 get 'books/:id' => 'books#show'
 post 'books' => 'books#create'
-get 'books/edit' => 'books#edit'
+get 'books/:id/edit' => 'books#edit'
 end

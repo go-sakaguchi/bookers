@@ -18,7 +18,7 @@
           <%= link_to "Show", "/books/#{book.id}" %>
         </td>
         <td>
-          <a href="/books">Edit</a>
+          <%= link_to "Edit", "/books/#{book.id}/edit" %>
         </td>
         <td>
           <a href="/books">Destroy</a>
@@ -30,18 +30,18 @@
 
 
 <h2>New book</h2>
-<%= form_with model: Book.new do |f| %>
+<%= form_with model: Book.new do |book| %>
   <div class = form>
     <p>Title</p>
-    <%= f.text_field :title %>
+    <%= book.text_field :title %>
   </div>
 
   <div class = form>
     <p>Body</p>
-    <%= f.text_area :body %>
+    <%= book.text_area :body %>
   </div>
 
   <div class = form>
-    <%= f.submit 'Create Book' %>
+    <%= book.submit 'Create Book' %>
   </div>
 <% end %>

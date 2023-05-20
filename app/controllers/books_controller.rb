@@ -9,9 +9,14 @@ class BooksController < ApplicationController
 
   def create
     book = Book.new(book_params)
-    book.save
-    @book_id = Book.all
-    redirect_to book_path(book.id)
+    if @book.save
+      redirect_to book_path(book.io)
+    else
+      redirect_to '/books'
+    end
+    # book.save
+    # @book_id = Book.all
+    # redirect_to book_path(book.id)
   end
 
   def show

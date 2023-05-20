@@ -5,5 +5,5 @@ get 'books' => 'books#index'
 get 'books/:id' => 'books#show', as: 'book'
 post 'books' => 'books#create'
 get 'books/:id/edit' => 'books#edit', as: 'edit_book'
-patch 'books/:id' => 'book#update', as: 'update_book'
+patch 'books/:id' => 'books#update', as: 'update_book'
 end

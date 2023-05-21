@@ -13,6 +13,7 @@ class BooksController < ApplicationController
     @book_confirm = Book.new(book_params)
 
     if @book_confirm.save
+      flash[:notice] = "Book was successfully updated."
       redirect_to book_path(@book_confirm.id)
     else
       @books = Book.all
@@ -37,6 +38,7 @@ class BooksController < ApplicationController
     @book_confirm = Book.find(params[:id])
 
     if @book_confirm.update(book_params)
+      flash[:notice] = "Book was successfully updated."
       redirect_to book_path(@book_confirm.id)
     else
       @book = Book.find(params[:id])

@@ -1,6 +1,8 @@
 class BooksController < ApplicationController
   def index
     @books = Book.all
+    @book = Book.new
+    @book_confirm = Book.new
   end
 
   def new
@@ -8,11 +10,14 @@ class BooksController < ApplicationController
   end
 
   def create
-    book = Book.new(book_params)
-    if book.save
-      redirect_to book_path(book.id)
+    @book_confirm = Book.new(book_params)
+
+    if @book_confirm.save
+      redirect_to book_path(@book_confirm.id)
     else
-      redirect_to '/books'
+      @books = Book.all
+      @book = Book.new(book_params)
+      render :index
     end
     # book.save
     # @book_id = Book.all
@@ -25,20 +30,26 @@ class BooksController < ApplicationController
 
   def edit
     @book = Book.find(params[:id])
+    @book_confirm = Book.new
   end
-  
+
   def update
-    book = Book.find(params[:id])
-    book.update(book_params)
-    redirect_to book_path(book.id)
+    @book_confirm = Book.find(params[:id])
+
+    if @book_confirm.update(book_params)
+      redirect_to book_path(@book_confirm.id)
+    else
+      @book = Book.find(params[:id])
+      render :edit
+    end
   end
-  
+
   def destroy
     book = Book.find(params[:id])
     book.destroy
     redirect_to '/books'
   end
-  
+
   private
 
   def book_params

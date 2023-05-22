@@ -1,31 +1,35 @@
-<h1>ここはeditページです</h1>
-
 <h1>Editing Book</h1>
 
-<% if @book_confirm.errors.count == 2%>
-  <h2><%= @book_confirm.errors.count %> errors prohibited this book from being saved:</h2>
-<% elsif @book_confirm.errors.count == 1%>
-  <h2><%= @book_confirm.errors.count %> error prohibited this book from being saved:</h2>
-<% end %>
-
-
 <% if @book_confirm.errors.any? %>
-  <ul>
-    <% @book_confirm.errors.full_messages.each do |message| %>
-      <li><%= message %></li>
+  <div id = error_message>
+    <% if @book_confirm.errors.count == 2%>
+      <h2><%= @book_confirm.errors.count %> errors prohibited this book from being saved:</h2>
+      <ul>
+        <% @book_confirm.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    
+    <% elsif @book_confirm.errors.count == 1%>
+      <h2><%= @book_confirm.errors.count %> error prohibited this book from being saved:</h2>
+      <ul>
+        <% @book_confirm.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
     <% end %>
-  </ul>
+  </div>
 <% end %>
 
 
 <%= form_with model: @book, url:update_book_path(@book.id), method: :patch do |book| %>
   <div class = form>
-    <p>Title</p>
+    <label for="book_title">Title</label>
     <%= book.text_field :title %>
   </div>
 
   <div class = form>
-    <p>Body</p>
+    <label for="book_body">Body</label>
     <%= book.text_area :body %>
   </div>
 
@@ -34,9 +38,9 @@
   </div>
 
   <p>
-    <%= link_to "Show", book_path(@book.id) %>
+    <%= link_to "Show", book_path(@book.id),class: "link" %>
     ｜
-    <%= link_to "Back", "/books" %>
+    <%= link_to "Back", "/books",class: "link" %>
   </p>
 
 <% end %>
